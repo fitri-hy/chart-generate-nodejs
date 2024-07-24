@@ -12,7 +12,6 @@
 	<meta property="og:image" content="https://<%= domain %>/og.jpg">
 	<meta property="og:url" content="https://<%= domain %>">
 	<link rel="icon" href="/logo.png" type="image/png">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 p-4 md:p-6 text-gray-700 min-h-screen w-full flex flex-col items-center justify-center">
@@ -27,7 +26,7 @@
 			<div class="grid grid-cols-2 gap-4">
 				<div class="flex flex-col gap-1">
 					<p class="font-semibold">Chart Type:</p>
-					<select id="type" name="type" class="w-full p-2 rounded bg-gray-100 border focus:outline-none">
+					<select id="type" name="type" class="w-full p-2 rounded bg-gray-100 border focus:outline-none"">
 						<option value="bar">Bar</option>
 						<option value="line">Line</option>
 						<option value="pie">Pie</option>
@@ -49,37 +48,37 @@
 				</div>
 				<div class="flex flex-col gap-1">
 					<p class="font-semibold">Border Widths</p>
-					<input class="w-full p-2 rounded bg-gray-100 border focus:outline-none"" type="text" id="borderWidth" name="borderWidth" value="1,1,1">
+					<input class="w-full p-2 rounded bg-gray-100 border focus:outline-none"" type="text" id="borderWidth" name="borderWidth" value="1">
 				</div>
 			</div>
             <div class="flex flex-col gap-1">
 				<p class="font-semibold">Labels (comma-separated):</p>
-				<textarea class="w-full p-2 rounded bg-gray-100 border focus:outline-none"" type="text" id="labels" name="labels" required>Label1,Label2,Label3</textarea>
+				<input class="w-full p-2 rounded bg-gray-100 border focus:outline-none"" type="text" id="labels" name="labels" value="Label1,Label2,Label3" required>
             </div>
             <div class="flex flex-col gap-1">
-				<p class="font-semibold">Background Colors (comma-separated, RGB or RGBA format):</p>
-				<textarea class="w-full p-2 rounded bg-gray-100 border focus:outline-none"" type="text" id="backgroundColor" name="backgroundColor">rgba(255, 99, 132, 0.2),rgba(54, 162, 235, 0.2),rgba(255, 206, 86, 0.2)</textarea>
+				<p class="font-semibold">Background Colors (RGB or RGBA format):</p>
+				<input class="w-full p-2 rounded bg-gray-100 border focus:outline-none"" type="text" id="backgroundColor" name="backgroundColor" value="rgba(255, 99, 132, 0.2)">
             </div>
             <div class="flex flex-col gap-1">
-				<p class="font-semibold">Border Colors (comma-separated, RGB or RGBA format):</p>
-				<textarea class="w-full p-2 rounded bg-gray-100 border focus:outline-none"" type="text" id="borderColor" name="borderColor">rgba(255, 99, 132, 1),rgba(54, 162, 235, 1),rgba(255, 206, 86, 1)</textarea>
+				<p class="font-semibold">Border Colors (RGB or RGBA format):</p>
+				<input class="w-full p-2 rounded bg-gray-100 border focus:outline-none"" type="text" id="borderColor" name="borderColor" value="rgba(255, 99, 132, 1)">
             </div>
             <div class="flex flex-col gap-1">
-				<p class="font-semibold">Point Background Colors (comma-separated, RGB or RGBA format):</p>
-				<textarea class="w-full p-2 rounded bg-gray-100 border focus:outline-none"" type="text" id="pointBackgroundColor" name="pointBackgroundColor">rgba(255, 99, 132, 0.2),rgba(54, 162, 235, 0.2)</textarea>
+				<p class="font-semibold">Point Background Colors (RGB or RGBA format):</p>
+				<input class="w-full p-2 rounded bg-gray-100 border focus:outline-none"" type="text" id="pointBackgroundColor" name="pointBackgroundColor" value="rgba(255, 99, 132, 0.2)">
             </div>
             <div class="flex flex-col gap-1">
-				<p class="font-semibold">Point Border Colors (comma-separated, RGB or RGBA format):</p>
-				<textarea class="w-full p-2 rounded bg-gray-100 border focus:outline-none""type="text" id="pointBorderColor" name="pointBorderColor">rgba(255, 99, 132, 1),rgba(54, 162, 235, 1)</textarea>
+				<p class="font-semibold">Point Border Colors (RGB or RGBA format):</p>
+				<input class="w-full p-2 rounded bg-gray-100 border focus:outline-none""type="text" id="pointBorderColor" name="pointBorderColor" value="rgba(255, 99, 132, 1)">
             </div>
 			<div class="grid grid-cols-2 gap-4">
 				<div class="flex flex-col gap-1">
-					<p class="font-semibold">Point Border Widths (comma-separated):</p>
-					<input class="w-full p-2 rounded bg-gray-100 border focus:outline-none"" type="text" id="pointBorderWidth" name="pointBorderWidth" value="1,1">
+					<p class="font-semibold">Point Border Widths:</p>
+					<input class="w-full p-2 rounded bg-gray-100 border focus:outline-none"" type="text" id="pointBorderWidth" name="pointBorderWidth" value="1">
 				</div>
 				<div class="flex flex-col gap-1">
-					<p class="font-semibold">Point Radius (comma-separated):</p>
-					<input class="w-full p-2 rounded bg-gray-100 border focus:outline-none"" type="text" id="pointRadius" name="pointRadius" value="5,5">
+					<p class="font-semibold">Point Radius:</p>
+					<input class="w-full p-2 rounded bg-gray-100 border focus:outline-none"" type="text" id="pointRadius" name="pointRadius" value="5">
 				</div>
 			</div>
 			<div class="grid grid-cols-2 gap-4">
