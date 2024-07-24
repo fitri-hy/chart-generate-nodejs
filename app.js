@@ -40,25 +40,28 @@ app.get('/chart', async (req, res) => {
       tooltipEnabled = 'true',
     } = req.query;
 
-    // Validate inputs
     if (!type || !labels || !data) {
-      return res.status(400).send('Invalid parameters');
+      return res.status(400).send('Missing required parameters: type, labels, and data are required.');
     }
 
-    const parsedLabels = labels.split(',');
+    const parsedLabels = labels.split(',').map(label => label.trim());
     let parsedData;
-    if (type === 'bubble') {
-      parsedData = data.split(';').map(entry => {
-        const [x, y, r] = entry.split(',').map(Number);
-        return { x, y, r };
-      });
-    } else if (type === 'scatter') {
-      parsedData = data.split(';').map(entry => {
-        const [x, y] = entry.split(',').map(Number);
-        return { x, y };
-      });
-    } else {
-      parsedData = data.split(',').map(Number);
+
+    switch (type) {
+      case 'bubble':
+        parsedData = data.split(';').map(entry => {
+          const [x, y, r] = entry.split(',').map(Number);
+          return { x, y, r };
+        });
+        break;
+      case 'scatter':
+        parsedData = data.split(';').map(entry => {
+          const [x, y] = entry.split(',').map(Number);
+          return { x, y };
+        });
+        break;
+      default:
+        parsedData = data.split(',').map(Number);
     }
 
     const parsedBackgroundColor = backgroundColor.split(';').map(color => color.trim());
@@ -68,7 +71,7 @@ app.get('/chart', async (req, res) => {
     const parsedPointBorderColor = pointBorderColor.split(';').map(color => color.trim());
     const parsedPointBorderWidth = pointBorderWidth.split(',').map(Number);
     const parsedPointRadius = pointRadius.split(',').map(Number);
-    const parsedTension = parseFloat(tension);
+    const parsedTension = parseFloat(tension) || 0;
 
     const chartJSNodeCanvas = new ChartJSNodeCanvas({ width: 800, height: 600 });
 
@@ -86,7 +89,7 @@ app.get('/chart', async (req, res) => {
           pointBorderColor: parsedPointBorderColor,
           pointBorderWidth: parsedPointBorderWidth,
           pointRadius: parsedPointRadius,
-          tension: type === 'line' ? parsedTension : undefined // Apply tension only for line charts
+          tension: type === 'line' ? parsedTension : undefined
         }]
       },
       options: {
