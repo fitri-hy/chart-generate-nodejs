@@ -11,6 +11,7 @@
   "license": "MIT",
   "description": "Chart Generator adalah aplikasi web intuitif yang memungkinkan pengguna untuk membuat berbagai jenis grafik dengan mudah dan cepat.",
   "dependencies": {
+    "canvas": "^2.11.2",
     "chartjs-node-canvas": "^4.1.6",
     "cors": "^2.8.5",
     "ejs": "^3.1.10",
