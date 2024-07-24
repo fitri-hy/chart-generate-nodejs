@@ -1,5 +1,5 @@
 const { ChartJSNodeCanvas } = require('chartjs-node-canvas');
-// const canvas = require('canvas');
+const { createCanvas } = require('canvas');
 
 module.exports = async (req, res) => {
   try {
@@ -54,7 +54,12 @@ module.exports = async (req, res) => {
     const parsedPointRadius = pointRadius.split(',').map(Number);
     const parsedTension = parseFloat(tension) || 0;
 
-    const chartJSNodeCanvas = new ChartJSNodeCanvas({ width: 800, height: 600 });
+    const chartJSNodeCanvas = new ChartJSNodeCanvas({
+      width: 800,
+      height: 600,
+      // Berikan context untuk penggunaan canvas (jika diperlukan)
+      canvas: createCanvas
+    });
 
     const chartConfig = {
       type: type,
@@ -88,7 +93,7 @@ module.exports = async (req, res) => {
                   label += ': ';
                 }
                 if (context.parsed.y !== null) {
-                  label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(context.parsed.y);
+                  label += context.parsed.y;
                 }
                 return label;
               }
