@@ -1,11 +1,10 @@
 const express = require('express');
-const { createCanvas } = require('canvas');
+const { ChartJSNodeCanvas } = require('chartjs-node-canvas');
 const cors = require('cors');
 const path = require('path');
-const Chart = require('chart.js/auto');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 app.use(cors());
 
 app.set('views', path.join(__dirname, 'views'));
@@ -22,7 +21,7 @@ app.get('/', (req, res) => {
   res.render('index', { domain: req.domain });
 });
 
-app.get('/chart', (req, res) => {
+app.get('/chart', async (req, res) => {
   const {
     type = 'line',
     title = 'My Chart',
@@ -65,8 +64,7 @@ app.get('/chart', (req, res) => {
   const parsedPointRadius = pointRadius.split(',').map(Number);
   const parsedTension = parseFloat(tension);
 
-  const canvas = createCanvas(800, 600);
-  const ctx = canvas.getContext('2d');
+  const chartJSNodeCanvas = new ChartJSNodeCanvas({ width: 800, height: 600 });
 
   const chartConfig = {
     type: type,
@@ -105,9 +103,6 @@ app.get('/chart', (req, res) => {
               return label;
             }
           }
-        },
-        customCanvasBackgroundColor: {
-          color: 'lightGreen',
         }
       },
       scales: {
@@ -128,10 +123,13 @@ app.get('/chart', (req, res) => {
     plugins: []
   };
 
-  new Chart(ctx, chartConfig);
-
-  res.setHeader('Content-Type', 'image/png');
-  canvas.createPNGStream().pipe(res);
+  try {
+    const image = await chartJSNodeCanvas.renderToBuffer(chartConfig);
+    res.setHeader('Content-Type', 'image/png');
+    res.send(image);
+  } catch (error) {
+    res.status(500).send('Error generating chart');
+  }
 });
 
 app.listen(port, () => {
