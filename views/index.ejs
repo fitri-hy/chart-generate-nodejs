@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart Generator | Powered by I-As.Dev</title>
+	<meta name="description" content="Chart Generator adalah aplikasi web yang memudahkan pembuatan berbagai jenis grafik seperti bar, line, pie, doughnut, radar, bubble, dan scatter. Sesuaikan grafik dengan data dan opsi kustomisasi untuk visualisasi yang efektif dan menarik.">
+	<meta name="author" content="I-As.Dev">
+	<meta name="keywords" content="Chart Generator, Data Visualization, Graph Maker, Web Application, Charts">
+	<meta property="og:title" content="Chart Generator | Powered by I-As.Dev">
+	<meta property="og:description" content="Chart Generator adalah aplikasi web yang memungkinkan Anda untuk membuat berbagai jenis grafik dengan mudah dan cepat. Sesuaikan data dan tampilan grafik secara real-time dengan berbagai opsi kustomisasi dan lihat hasilnya langsung di browser Anda.">
+	<meta property="og:image" content="https://<%= domain %>/og.jpg">
+	<meta property="og:url" content="https://<%= domain %>">
+	<link rel="icon" href="/logo.png" type="image/png">
+	<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-4 md:p-6 text-gray-700 min-h-screen w-full flex flex-col items-center justify-center">
+    <header class="w-full flex flex-col gap-2 items-center justify-center pt-6 pb-20">
+		<img class="m-auto h-36 w-36" src="/logo.png">
+		<h1 class="text-center text-4xl text-gray-900 font-extrabold">Chart Generator</h1>
+		<p class="text-center max-w-lg m-auto">Chart Generator adalah aplikasi web intuitif yang memungkinkan pengguna untuk membuat berbagai jenis grafik dengan mudah dan cepat.</p>
+	</header>
+	<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
+        <form id="chartForm" class="flex flex-col gap-4 bg-white px-4 py-9 rounded-md shadow-lg">
+			<h2 class="text-3xl font-extrabold text-center mb-9">Chart Settings</h2>
+			<div class="grid grid-cols-2 gap-4">
+				<div class="flex flex-col gap-1">
+					<p class="font-semibold">Chart Type:</p>
+					<select id="type" name="type" class="w-full p-2 rounded bg-gray-100 border focus:outline-none"">
+						<option value="bar">Bar</option>
+						<option value="line">Line</option>
+						<option value="pie">Pie</option>
+						<option value="doughnut">Doughnut</option>
+						<option value="radar">Radar</option>
+						<option value="bubble">Bubble</option>
+						<option value="scatter">Scatter</option>
+					</select>
+				</div>
+				<div class="flex flex-col gap-1">
+					<p class="font-semibold">Chart Title:</p>
+					<input class="w-full p-2 rounded bg-gray-100 border focus:outline-none"" type="text" id="title" name="title" value="My Chart" required>
+				</div>
+			</div>
+			<div class="grid grid-cols-2 gap-4">
+				<div class="flex flex-col gap-1">
+					<p class="font-semibold">Data (bubble/scatter: x,y,r):</p>
+					<input class="w-full p-2 rounded bg-gray-100 border focus:outline-none"" type="text" id="data" name="data" value="10,20,30" required>
+				</div>
+				<div class="flex flex-col gap-1">
+					<p class="font-semibold">Border Widths</p>
+					<input class="w-full p-2 rounded bg-gray-100 border focus:outline-none"" type="text" id="borderWidth" name="borderWidth" value="1,1,1">
+				</div>
+			</div>
+            <div class="flex flex-col gap-1">
+				<p class="font-semibold">Labels (comma-separated):</p>
+				<textarea class="w-full p-2 rounded bg-gray-100 border focus:outline-none"" type="text" id="labels" name="labels" required>Label1,Label2,Label3</textarea>
+            </div>
+            <div class="flex flex-col gap-1">
+				<p class="font-semibold">Background Colors (comma-separated, RGB or RGBA format):</p>
+				<textarea class="w-full p-2 rounded bg-gray-100 border focus:outline-none"" type="text" id="backgroundColor" name="backgroundColor">rgba(255, 99, 132, 0.2),rgba(54, 162, 235, 0.2),rgba(255, 206, 86, 0.2)</textarea>
+            </div>
+            <div class="flex flex-col gap-1">
+				<p class="font-semibold">Border Colors (comma-separated, RGB or RGBA format):</p>
+				<textarea class="w-full p-2 rounded bg-gray-100 border focus:outline-none"" type="text" id="borderColor" name="borderColor">rgba(255, 99, 132, 1),rgba(54, 162, 235, 1),rgba(255, 206, 86, 1)</textarea>
+            </div>
+            <div class="flex flex-col gap-1">
+				<p class="font-semibold">Point Background Colors (comma-separated, RGB or RGBA format):</p>
+				<textarea class="w-full p-2 rounded bg-gray-100 border focus:outline-none"" type="text" id="pointBackgroundColor" name="pointBackgroundColor">rgba(255, 99, 132, 0.2),rgba(54, 162, 235, 0.2)</textarea>
+            </div>
+            <div class="flex flex-col gap-1">
+				<p class="font-semibold">Point Border Colors (comma-separated, RGB or RGBA format):</p>
+				<textarea class="w-full p-2 rounded bg-gray-100 border focus:outline-none""type="text" id="pointBorderColor" name="pointBorderColor">rgba(255, 99, 132, 1),rgba(54, 162, 235, 1)</textarea>
+            </div>
+			<div class="grid grid-cols-2 gap-4">
+				<div class="flex flex-col gap-1">
+					<p class="font-semibold">Point Border Widths (comma-separated):</p>
+					<input class="w-full p-2 rounded bg-gray-100 border focus:outline-none"" type="text" id="pointBorderWidth" name="pointBorderWidth" value="1,1">
+				</div>
+				<div class="flex flex-col gap-1">
+					<p class="font-semibold">Point Radius (comma-separated):</p>
+					<input class="w-full p-2 rounded bg-gray-100 border focus:outline-none"" type="text" id="pointRadius" name="pointRadius" value="5,5">
+				</div>
+			</div>
+			<div class="grid grid-cols-2 gap-4">
+				<div class="flex flex-col gap-1">
+					<p class="font-semibold">Line Tension:</p>
+					<input class="w-full p-2 rounded bg-gray-100 border focus:outline-none""type="text" id="tension" name="tension" value="0.1">
+				</div>
+				<div class="flex flex-col gap-1">
+					<p class="font-semibold">Display Legend:</p>
+					<select class="w-full p-2 rounded bg-gray-100 border focus:outline-none"" id="displayLegend" name="displayLegend">
+						<option value="true">Yes</option>
+						<option value="false">No</option>
+					</select>
+				</div>
+			</div>
+            <div class="flex flex-col gap-1 hidden">
+				<p class="font-semibold">Display Tooltip:</p>
+				<select class="w-full p-2 rounded bg-gray-100 border focus:outline-none"" id="tooltipEnabled" name="tooltipEnabled">
+					<option value="true">Yes</option>
+					<option value="false">No</option>
+				</select>
+			</div>
+        </form>
+		<div class="flex flex-col gap-4 bg-white px-4 py-9 rounded-md shadow-lg">
+			<div>
+				<h2 class="text-3xl font-extrabold text-center mb-9">Chart Result</h2>
+				<img id="chartImage" src="" alt="Chart will appear here" />
+			</div>
+			<div>
+				<p class="font-semibold">How to Use:</p>
+				<textarea class="w-full mt-2 bg-gray-100 p-4 rounded border focus:outline-none" rows="15" id="apiEndpoint" readonly></textarea>
+			</div>
+		</div>
+    </div>
+	<footer>
+		<p class="text-gray-500 mt-9">©2024 <a class="text-blue-500" href="https://i-as.dev/">I-As.Dev</a>. All Rights Reserved. </p>
+	</footer>
+    <script>
+        function updateChart() {
+            const formData = new FormData(document.getElementById('chartForm'));
+            const params = new URLSearchParams(formData).toString();
+            const chartImage = document.getElementById('chartImage');
+            chartImage.src = `/chart?${params}`;
+            document.getElementById('apiEndpoint').textContent = `<img src="https://<%= domain %>/chart?${params}" alt="chart">`;
+        }
+
+        document.querySelectorAll('#chartForm input, #chartForm select').forEach(element => {
+            element.addEventListener('change', updateChart);
+        });
+
+        updateChart();
+    </script>
+</body>
+</html>
