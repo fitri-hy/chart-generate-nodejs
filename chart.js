@@ -1,5 +1,5 @@
 const { ChartJSNodeCanvas } = require('chartjs-node-canvas');
-const canvas = require('canvas');
+// const canvas = require('canvas');
 
 module.exports = async (req, res) => {
   try {
