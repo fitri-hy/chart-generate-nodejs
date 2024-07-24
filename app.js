@@ -1,6 +1,7 @@
 const express = require('express');
 const { ChartJSNodeCanvas } = require('chartjs-node-canvas');
 const cors = require('cors');
+const canvas = require('canvas');
 const path = require('path');
 
 const app = express();
